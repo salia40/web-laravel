@@ -140,7 +140,7 @@ function productRows(list=db.products) {
 
 function products() {
   return heading('Produk','Kelola katalog, harga, dan stok produk.',
-    '<button class="btn" onclick="openForm(\\'product\\')">＋ Tambah Produk</button>')
+    `<button class="btn" onclick="openForm('product')">＋ Tambah Produk</button>`)
     + `<div class="toolbar">
       <input id="search" placeholder="Cari nama atau SKU produk..." oninput="searchProducts(this.value)">
       <button class="btn secondary" onclick="exportCSV()">Export CSV</button>
