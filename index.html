@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PinkStock | Inventory Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>🌸 PinkStock</h2>
+    <p class="sub">INVENTORY MANAGEMENT</p>
+    <button class="nav active" data-page="dashboard">▦ Dashboard</button>
+    <button class="nav" data-page="products">📦 Produk</button>
+    <button class="nav" data-page="categories">◈ Kategori</button>
+    <button class="nav" data-page="suppliers">♧ Supplier</button>
+    <button class="nav" data-page="purchases">↓ Barang Masuk</button>
+    <button class="nav" data-page="sales">↑ Penjualan</button>
+    <button class="nav" data-page="reports">▤ Laporan</button>
+    <div class="side-note">♡ Kelola stok lebih mudah.</div>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <small>WORKSPACE / PINKSTOCK</small>
+        <h2 id="pageTitle">Dashboard</h2>
+      </div>
+      <div class="user"><span>👩🏻‍💻</span> Admin PinkStock</div>
+    </header>
+
+    <section id="content"></section>
+    <footer>© 2026 PinkStock · Inventory &amp; Sales Management System</footer>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-card">
+      <button id="closeModal" class="close">×</button>
+      <h2 id="formTitle">Tambah data</h2>
+      <form id="dataForm"></form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
