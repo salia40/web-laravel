@@ -7,40 +7,69 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside class="sidebar">
-    <h2>🌸 PinkStock</h2>
-    <p class="sub">INVENTORY MANAGEMENT</p>
-    <button class="nav active" data-page="dashboard">▦ Dashboard</button>
-    <button class="nav" data-page="products">📦 Produk</button>
-    <button class="nav" data-page="categories">◈ Kategori</button>
-    <button class="nav" data-page="suppliers">♧ Supplier</button>
-    <button class="nav" data-page="purchases">↓ Barang Masuk</button>
-    <button class="nav" data-page="sales">↑ Penjualan</button>
-    <button class="nav" data-page="reports">▤ Laporan</button>
-    <div class="side-note">♡ Kelola stok lebih mudah.</div>
-  </aside>
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">🌸</div>
+      <h1>PinkStock</h1>
+      <p class="login-subtitle">Inventory Management System</p>
 
-  <main>
-    <header>
-      <div>
-        <small>WORKSPACE / PINKSTOCK</small>
-        <h2 id="pageTitle">Dashboard</h2>
-      </div>
-      <div class="user"><span>👩🏻‍💻</span> Admin PinkStock</div>
-    </header>
+      <form id="loginForm">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" placeholder="Masukkan email" required>
 
-    <section id="content"></section>
-    <footer>© 2026 PinkStock · Inventory &amp; Sales Management System</footer>
-  </main>
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" placeholder="Masukkan password" required>
+
+        <button type="submit" id="loginButton">Masuk</button>
+        <p id="loginMessage" role="alert"></p>
+      </form>
+
+      <p class="login-note">Login menggunakan akun PinkStock yang terdaftar.</p>
+    </div>
+  </section>
+
+  <div id="appShell" hidden>
+    <aside class="sidebar">
+      <h2>🌸 PinkStock</h2>
+      <p class="sub">INVENTORY MANAGEMENT</p>
+      <button class="nav active" data-page="dashboard">▦ Dashboard</button>
+      <button class="nav" data-page="products">📦 Produk</button>
+      <button class="nav" data-page="categories">◈ Kategori</button>
+      <button class="nav" data-page="suppliers">♧ Supplier</button>
+      <button class="nav" data-page="purchases">↓ Barang Masuk</button>
+      <button class="nav" data-page="sales">↑ Penjualan</button>
+      <button class="nav" data-page="reports">▤ Laporan</button>
+      <div class="side-note">♡ Kelola stok lebih mudah.</div>
+    </aside>
+
+    <main>
+      <header>
+        <div>
+          <small>WORKSPACE / PINKSTOCK</small>
+          <h2 id="pageTitle">Dashboard</h2>
+        </div>
+        <div class="user">
+          <span>👩🏻‍💻</span>
+          <span id="currentUserName">Admin PinkStock</span>
+          <button type="button" id="logoutButton">Keluar</button>
+        </div>
+      </header>
+
+      <section id="content"></section>
+      <footer>© 2026 PinkStock · Inventory &amp; Sales Management System</footer>
+    </main>
+  </div>
 
   <div id="modal" class="modal">
     <div class="modal-card">
-      <button id="closeModal" class="close">×</button>
+      <button id="closeModal" class="close" type="button">×</button>
       <h2 id="formTitle">Tambah data</h2>
       <form id="dataForm"></form>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
