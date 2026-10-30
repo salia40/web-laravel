@@ -351,3 +351,92 @@ window.exportCSV = () => {
 };
 
 render();
+const supabase = window.supabaseClient;
+
+const loginScreen = document.querySelector('#loginScreen');
+const appShell = document.querySelector('#appShell');
+const loginForm = document.querySelector('#loginForm');
+const loginMessage = document.querySelector('#loginMessage');
+const loginButton = document.querySelector('#loginButton');
+const logoutButton = document.querySelector('#logoutButton');
+const currentUserName = document.querySelector('#currentUserName');
+
+async function checkLogin() {
+  const { data: { session }, error } =
+    await supabase.auth.getSession();
+
+  if (error) {
+    loginMessage.textContent = error.message;
+    return;
+  }
+
+  if (!session) {
+    appShell.hidden = true;
+    loginScreen.hidden = false;
+    return;
+  }
+
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('username, full_name, role')
+    .eq('id', session.user.id)
+    .maybeSingle();
+
+  if (profileError || !profile) {
+    await supabase.auth.signOut();
+    appShell.hidden = true;
+    loginScreen.hidden = false;
+    loginMessage.textContent =
+      'Profil pengguna tidak ditemukan. Hubungi admin.';
+    return;
+  }
+
+  loginScreen.hidden = true;
+  appShell.hidden = false;
+  currentUserName.textContent =
+    profile.full_name || profile.username || session.user.email;
+
+  document.body.dataset.role = profile.role;
+}
+
+loginForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  loginButton.disabled = true;
+  loginMessage.textContent = 'Sedang masuk...';
+
+  const email = document.querySelector('#loginEmail').value.trim();
+  const password = document.querySelector('#loginPassword').value;
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  loginButton.disabled = false;
+
+  if (error) {
+    loginMessage.textContent =
+      'Login gagal. Periksa email dan password kamu.';
+    return;
+  }
+
+  loginMessage.textContent = '';
+  await checkLogin();
+});
+
+logoutButton.addEventListener('click', async () => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    alert('Gagal keluar. Coba lagi.');
+    return;
+  }
+
+  appShell.hidden = true;
+  loginScreen.hidden = false;
+  loginForm.reset();
+  loginMessage.textContent = '';
+});
+
+checkLogin();
